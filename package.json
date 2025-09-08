@@ -6,6 +6,8 @@
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
+    "build:css": "npx @tailwindcss/cli -i ./src/index.css -o ./dist/src/output.css",
+    "watch:css": "npx @tailwindcss/cli -i ./src/index.css -o ./dist/src/output.css --watch",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
