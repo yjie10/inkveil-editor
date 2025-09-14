@@ -1,5 +1,8 @@
 import { useCallback } from 'react';
+
 import Editor from './components/Editor/Editor';
+import Toolbar from './components/Toolbar/ToolBar';
+
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
@@ -32,6 +35,7 @@ function App() {
 
       <main className="max-w-4xl mx-auto">
         <Editor content={content} onContentChange={setContent} />
+        <Toolbar content={content} />
       </main>
     </div>
   );
