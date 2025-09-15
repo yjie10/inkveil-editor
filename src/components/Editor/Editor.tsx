@@ -62,13 +62,20 @@ const Editor = ({ content, onContentChange }: EditorProps) => {
       <div
         ref={editorRef}
         contentEditable
-        className="w-full h-80 p-3 font-serif rounded-lg border border-zinc-700 bg-zinc-800 
-                   focus:outline-none focus:ring-2 focus:ring-indigo-400 
-                   prose prose-invert max-w-none"
+        className="w-full min-h-[600px] p-8 bg-white border border-slate-200 rounded-lg shadow-sm
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                   text-slate-800 leading-relaxed text-lg
+                   font-serif selection:bg-blue-100
+                   prose prose-lg max-w-none prose-slate
+                   prose-headings:text-slate-800 prose-headings:font-semibold
+                   prose-p:text-slate-700 prose-p:leading-relaxed
+                   prose-strong:text-slate-800 prose-strong:font-semibold
+                   prose-em:text-slate-700 prose-em:italic"
         suppressContentEditableWarning
         spellCheck
         role="textbox"
         aria-label="Rich text editor"
+        placeholder="Start writing your story..."
       />
     </div>
   );

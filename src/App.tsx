@@ -2,19 +2,28 @@ import { useCallback } from 'react';
 
 import Editor from './components/Editor/Editor';
 import Toolbar from './components/Toolbar/ToolBar';
+import { ToastProvider, useToast } from './contexts/ToastContext';
 
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 const LOCAL_STORAGE_KEY = 'inkveil-content';
 
-function App() {
+function AppContent() {
   const [content, setContent] = useLocalStorage(LOCAL_STORAGE_KEY, '');
+  const { showToast } = useToast();
 
   // Save handler
   const handleSave = useCallback(() => {
+    // Content is automatically saved via useLocalStorage hook
+    // Show success toast notification
+    showToast({
+      message: 'Content saved successfully!',
+      type: 'success',
+      duration: 2000,
+    });
     console.log('Content saved!');
-  }, []);
+  }, [showToast]);
 
   // Setup save shortcut
   useKeyboardShortcuts([
@@ -28,16 +37,38 @@ function App() {
   ]);
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-zinc-100 p-6">
-      <header className="mb-6">
-        <h1 className="text-3xl text-pink-300 font-semibold">Inkveil Editor</h1>
+    <div className="min-h-screen bg-slate-50 text-slate-800">
+      {/* Minimal header */}
+      <header className="bg-white border-b border-slate-200 px-6 py-4">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <h1 className="text-xl font-medium text-slate-700">Inkveil Editor</h1>
+          <div className="text-sm text-slate-500">
+            {
+              content
+                .replace(/<[^>]*>/g, '')
+                .trim()
+                .split(/\s+/)
+                .filter((word) => word.length > 0).length
+            }{' '}
+            words
+          </div>
+        </div>
       </header>
 
-      <main className="max-w-4xl mx-auto">
+      {/* Main writing area */}
+      <main className="max-w-4xl mx-auto px-6 py-8">
         <Editor content={content} onContentChange={setContent} />
-        <Toolbar content={content} />
+        <Toolbar content={content} onSave={handleSave} />
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ToastProvider>
+      <AppContent />
+    </ToastProvider>
   );
 }
 

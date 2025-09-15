@@ -33,13 +33,14 @@ const ExportButton = ({ content }: Props) => {
   return (
     <button
       onClick={handleExport}
-      className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded 
-                 text-sm transition-colors duration-200 cursor-pointer
-                 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md 
+                 text-sm font-medium transition-colors duration-200 cursor-pointer
+                 disabled:opacity-50 disabled:cursor-not-allowed
+                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       type="button"
       aria-label="Export document as text file"
     >
-      Export as .txt
+      Export
     </button>
   );
 };
