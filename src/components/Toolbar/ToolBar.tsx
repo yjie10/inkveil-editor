@@ -1,11 +1,14 @@
-import ExportButton from './ExportButton';
+// Removed ExportButton - focusing on file-based saving only
 
 type Props = {
   content: string;
+  onNew: () => void;
   onSave: () => void;
+  onSaveAs: () => void;
+  onOpen: () => void;
 };
 
-const Toolbar = ({ content, onSave }: Props) => {
+const Toolbar = ({ content, onNew, onSave, onSaveAs, onOpen }: Props) => {
   const wordCount = content
     .replace(/<[^>]*>/g, '')
     .trim()
@@ -30,10 +33,32 @@ const Toolbar = ({ content, onSave }: Props) => {
         </div>
 
         {/* Action buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onNew}
+            className="bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-3 rounded-md 
+                       text-sm font-medium transition-colors duration-200 cursor-pointer
+                       disabled:opacity-50 disabled:cursor-not-allowed
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            type="button"
+            aria-label="New document"
+          >
+            New
+          </button>
+          <button
+            onClick={onOpen}
+            className="bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-3 rounded-md 
+                       text-sm font-medium transition-colors duration-200 cursor-pointer
+                       disabled:opacity-50 disabled:cursor-not-allowed
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            type="button"
+            aria-label="Open document"
+          >
+            Open
+          </button>
           <button
             onClick={onSave}
-            className="bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-4 rounded-md 
+            className="bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-3 rounded-md 
                        text-sm font-medium transition-colors duration-200 cursor-pointer
                        disabled:opacity-50 disabled:cursor-not-allowed
                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -42,7 +67,17 @@ const Toolbar = ({ content, onSave }: Props) => {
           >
             Save
           </button>
-          <ExportButton content={content} />
+          <button
+            onClick={onSaveAs}
+            className="bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-3 rounded-md 
+                       text-sm font-medium transition-colors duration-200 cursor-pointer
+                       disabled:opacity-50 disabled:cursor-not-allowed
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            type="button"
+            aria-label="Save document as"
+          >
+            Save As
+          </button>
         </div>
       </div>
     </div>

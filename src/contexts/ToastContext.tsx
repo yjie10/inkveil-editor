@@ -5,7 +5,7 @@ import {
   useCallback,
   ReactNode,
 } from 'react';
-import Toast, { ToastProps } from '../components/Toast/Toast';
+import Toast from '../components/Toast/Toast';
 
 export interface ToastData {
   id: string;
